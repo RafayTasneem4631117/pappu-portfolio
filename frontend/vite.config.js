@@ -7,7 +7,7 @@ import react from '@vitejs/plugin-react'
 // in the browser at  /pappu/pappu-hi.png  — and it is copied into the build.
 export default defineConfig({
   plugins: [react()],
-  publicDir: '../assets',
+  publicDir: 'public',
   server: {
     port: 5173,
     // During development, forward /api/... calls to the FastAPI backend
