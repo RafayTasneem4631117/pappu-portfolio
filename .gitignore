@@ -1,0 +1,25 @@
+# --- dependencies / build ---
+node_modules/
+dist/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# --- secrets (NEVER commit these) ---
+.env
+*.env
+!.env.example
+
+# --- generated data ---
+backend/chroma_db/
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- big source files you may add later ---
+# blender/*.blend1
+assets/projects/hunted-hunter/project.pdf

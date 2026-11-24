@@ -1,0 +1,58 @@
+/* ============================================================
+   INTERACTIVE EFFECTS — hover tilt, glow, tap highlight.
+   The JavaScript (hooks/useTilt.js) only sets CSS variables:
+     --rx / --ry : tilt angles      --mx / --my : pointer position
+   Everything visual lives here so you can tweak it easily.
+   ============================================================ */
+
+.tilt {
+  --scale: 1;
+  transform: perspective(800px) rotate(var(--rot, 0deg)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--scale));
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, background-color 0.35s ease;
+  will-change: transform;
+}
+/* while the pointer is over the element: follow it quickly */
+.tilt[data-hover='true'] { transition: transform 0.12s ease-out, box-shadow 0.3s ease, background-color 0.3s ease; }
+
+/* ----- skill labels: grow a little + white glow ----- */
+.skill { transform: rotate(var(--rot)); transform-origin: center; }
+.skill__label { --rot: 0deg; position: relative; }
+.skill__label[data-hover='true'],
+.skill__label[data-active='true'],
+.skill__label:focus-visible {
+  --scale: 1.08;
+  background-color: rgba(251, 251, 246, 0.07);
+  box-shadow: 0 0 0 1px rgba(251, 251, 246, 0.5), 0 0 22px rgba(251, 251, 246, 0.45), inset 0 0 14px rgba(251, 251, 246, 0.12);
+}
+/* soft specular highlight that follows the pointer */
+.skill__label::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.22), transparent 62%);
+  transition: opacity 0.3s ease;
+}
+.skill__label[data-hover='true']::after, .skill__label[data-active='true']::after { opacity: 1; }
+
+/* ----- project cards: slight grow + tilt + glow ----- */
+.card[data-hover='true'], .card[data-active='true'], .card:focus-visible {
+  --scale: 1.035;
+  box-shadow: 0 0 0 1px rgba(251, 251, 246, 0.5), 0 14px 44px rgba(251, 251, 246, 0.2);
+}
+.card::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.16), transparent 55%);
+  transition: opacity 0.3s ease;
+}
+.card[data-hover='true']::after, .card[data-active='true']::after { opacity: 1; }
+
+/* ----- Pappu (clickable) gets a tiny wiggle on hover ----- */
+.pappu-button { transition: transform 0.25s ease, filter 0.25s ease; }
+.pappu-button:hover, .pappu-button:focus-visible { transform: rotate(-4deg) scale(1.06); filter: drop-shadow(0 0 14px rgba(251, 251, 246, 0.5)); }
+.pappu-button:active { transform: scale(0.97); }
+
+/* ----- Respect "reduce motion" settings ----- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .tilt, .tilt[data-hover='true'] { transition: box-shadow 0.2s ease, background-color 0.2s ease; transform: rotate(var(--rot, 0deg)); }
+  .pappu-button, .pappu-button:hover { transition: none; transform: none; }
+  .chat, .pm__dialog, .bubble--typing span { animation: none !important; }
+}

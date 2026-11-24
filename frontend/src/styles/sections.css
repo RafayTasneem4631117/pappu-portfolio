@@ -1,0 +1,261 @@
+/* ============================================================
+   SECTION LAYOUTS — one block per section of the page.
+   Sizes use "cqw" (1% of page width) so the layout scales like the design.
+   ============================================================ */
+
+/* ---------- HERO ---------- */
+.hero {
+  --u: calc(100cqw / 1176);            /* 1 "design pixel" */
+  position: relative;
+  padding: calc(56 * var(--u)) 4.85cqw 0;
+}
+.hero__frame {
+  position: relative;
+  border: max(3px, 0.42cqw) solid var(--ink);
+  border-radius: clamp(24px, 3.4cqw, 48px);
+  aspect-ratio: 1063 / 624;
+  min-height: 300px;
+  display: grid;
+  place-items: center;
+}
+.hero__title { text-align: center; font-family: var(--font-display); font-weight: 400; font-style: italic; line-height: 1.15; padding: 0 3cqw; }
+.hero__hi, .hero__name { display: block; text-transform: uppercase; letter-spacing: 0.03em; }
+.hero__hi { font-size: clamp(32px, 5.05cqw, 76px); }
+.hero__name { font-size: clamp(28px, 5.2cqw, 90px); }
+
+/* The logo sits on the frame's top-left corner and hides a piece of the line */
+.hero__logo {
+  position: absolute;
+  left: calc(22 * var(--u) + 0px);
+  top: calc(30 * var(--u));
+  width: calc(103 * var(--u));
+  height: calc(82 * var(--u));
+  background: var(--bg);
+  padding: 0;
+  display: flex; align-items: flex-start;
+}
+.hero__logo img { width: calc(90 * var(--u)); height: auto; margin-top: 0; }
+
+.avatar { position: absolute; right: 2%; bottom: 2%; width: 26%; height: 86%; pointer-events: none; }
+
+/* ---------- ABOUT ---------- */
+.about__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 2cqw; margin-bottom: 2.2cqw; }
+.about__pappu { display: flex; align-items: flex-end; gap: 2.4cqw; padding-right: 0.6cqw; flex-shrink: 0; }
+.pappu-button { background: none; border: 0; padding: 0; cursor: pointer; display: block; width: clamp(70px, 11.2cqw, 160px); }
+.pappu-button img { width: 100%; height: auto; }
+.about__hi { font-family: var(--font-body); font-weight: 400; font-size: clamp(20px, 3.4cqw, 48px); margin-bottom: 1.2cqw; text-transform: none; }
+.about__text { font-size: clamp(17px, 2.45cqw, 36px); line-height: 1.5; letter-spacing: 0.05em; max-width: 91cqw; }
+
+/* ---------- THINGS I'M LEARNING ---------- */
+.learning { padding-bottom: calc(var(--gapY) * 0.9); }
+.learning__head { position: relative; display: flex; justify-content: space-between; align-items: flex-start; }
+.learning__doodles { position: absolute; left: calc(-1 * var(--pad) + 3.4cqw); top: -1cqw; display: flex; align-items: flex-start; gap: 0.6cqw; }
+.learning__books { width: 14.4cqw; margin-top: 3.4cqw; }
+.learning__pappu { width: 12.2cqw; }
+.learning__titles { margin-left: auto; text-align: right; }
+.learning__sub { font-size: clamp(20px, 1cqw, 34px); margin-top: 1.6cqw; letter-spacing: 0.06em; }
+
+.skills { position: relative; aspect-ratio: 1176 / 420; margin: 2.2cqw calc(-1 * var(--pad)) 0; }
+.skill { position: absolute; left: var(--x); top: var(--y); }
+.skill__label {
+  display: inline-block;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(12px, 3cqw, 48px);
+  padding: 0.55em 1em 0.45em;
+  border: max(2px, 0.42cqw) solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
+  cursor: default;
+}
+
+/* ---------- STUFF I'VE MADE ---------- */
+.projects { padding-bottom: calc(var(--gapY) * 0.95); }
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5.4cqw 6cqw;
+  margin: 5.4cqw -1cqw 0;
+}
+/* If the last card sits alone on its row, centre it (like Revision in the design) */
+.projects__grid > .card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: calc(50% - 3cqw);
+}
+.card {
+  display: flex;
+  flex-direction: column;          /* image on top, title fills the rest */
+  width: 100%;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  text-align: center;
+  background: var(--panel);
+  border: max(4px, 0.68cqw) solid var(--ink);
+  border-radius: clamp(28px, 5.2cqw, 76px);
+  overflow: hidden;
+}
+.card__image {
+  display: block;
+  flex: none;
+  aspect-ratio: 470 / 255;
+  overflow: hidden;
+  border-bottom: max(4px, 0.68cqw) solid var(--ink);
+  border-radius: 0 0 clamp(24px, 4.8cqw, 70px) clamp(24px, 4.8cqw, 70px);
+}
+.card__image img { width: 100%; height: 100%; object-fit: cover; }
+.card__title {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(20px, 3.6cqw, 52px);
+  flex: 1;
+  display: grid; place-items: center;
+  padding: 2.6cqw 2cqw 3cqw;
+  letter-spacing: 0.04em;
+}
+.projects__doodles { position: absolute; left: 3.4cqw; bottom: calc(var(--gapY) * 0.95 + 1cqw); display: flex; align-items: flex-end; gap: 2.6cqw; }
+.projects__pappu { width: 12.6cqw; }
+.projects__easel { width: 7.6cqw; margin-bottom: -0.4cqw; }
+
+/* ---------- IN MOTION ---------- */
+.motion .section-title { margin-bottom: 3.2cqw; }
+.video-frame {
+  position: relative;
+  width: 60%;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  background: var(--panel);
+  border: max(4px, 0.76cqw) solid var(--ink);
+  border-radius: clamp(28px, 6cqw, 86px);
+  overflow: hidden;
+}
+.video-frame__video { width: 100%; height: 100%; object-fit: cover; display: block; background: var(--panel); }
+.video-frame__play {
+  position: absolute; inset: 0; margin: auto;
+  width: 10cqw; min-width: 56px; height: 10cqw; min-height: 56px;
+  background: none; border: 0; padding: 0; cursor: pointer; color: var(--ink);
+}
+.video-frame__play svg { width: 100%; height: 100%; }
+.video-frame__note { position: absolute; left: 0; right: 0; bottom: 1.6cqw; text-align: center; font-size: clamp(11px, 1.5cqw, 20px); padding: 0 2cqw; }
+.video-frame__note code { font-family: inherit; border-bottom: 2px dashed var(--ink); }
+.motion__doodles { position: absolute; right: 2.6cqw; bottom: calc(var(--gapY) * 0.8); display: flex; align-items: flex-end; gap: 0.6cqw; }
+.motion__popcorn { width: 3.4cqw; min-width: 28px; margin-bottom: 0.4cqw; }
+.motion__pappu { width: 9.6cqw; }
+
+/* ---------- THE ROAD SO FAR ---------- */
+.road { padding-top: calc(var(--gapY) * 0.45); padding-bottom: calc(var(--gapY) * 0.9); }
+.road__car { position: absolute; right: 7.6cqw; top: calc(var(--gapY) * 0.45 + 0.4cqw); width: 20cqw; }
+.road__label { margin-top: 2.6cqw; font-family: var(--font-display); font-style: italic; font-size: clamp(18px, 3cqw, 42px); }
+.road__label span { display: inline-block; padding-bottom: 0.1em; border-bottom: max(2px, 0.2cqw) solid var(--ink); }
+.road__list { margin-top: 1.6cqw; display: grid; gap: 1.6cqw; }
+.road__title { font-size: clamp(16px, 2.45cqw, 36px); }
+.road__years { font-size: clamp(12px, 1.5cqw, 22px); margin-top: -0.2cqw; }
+
+/* ---------- LET'S TALK ---------- */
+.contact { padding-bottom: calc(var(--gapY) * 1.3); }
+.contact__grid { display: grid; grid-template-columns: 1fr 36.8cqw; gap: 3cqw; margin-top: 2cqw; margin-right: -4.5cqw; align-items: start; }
+.contact__pappu { width: 14.6cqw; margin: 0 0 0.4cqw 7.4cqw; }
+.contact__text { font-size: clamp(17px, 2.45cqw, 36px); line-height: 1.55; letter-spacing: 0.05em; max-width: 50cqw; }
+.contact__email { display: inline-block; margin-top: 1.8cqw; font-size: clamp(13px, 1.8cqw, 26px); color: var(--ink); text-decoration: none; letter-spacing: 0.04em; }
+.contact__email:hover { text-decoration: underline; }
+
+.form { display: grid; gap: 0.9cqw; }
+.field label { display: block; font-size: clamp(13px, 1.75cqw, 25px); padding-left: 1.2cqw; margin-bottom: 0.4cqw; }
+.field input, .field textarea {
+  width: 100%;
+  background: transparent;
+  color: var(--ink);
+  border: max(2px, 0.34cqw) solid var(--ink);
+  border-radius: clamp(10px, 1.3cqw, 18px);
+  padding: 0.9cqw 1.4cqw;
+  font: inherit; text-transform: none; letter-spacing: 0.02em;
+  font-size: max(16px, 1.8cqw);          /* ≥16px stops iOS zooming on focus */
+  min-height: clamp(44px, 4.4cqw, 60px);
+}
+.field textarea { min-height: 8.6cqw; resize: vertical; }
+.field input:focus, .field textarea:focus { outline: none; box-shadow: 0 0 0 3px rgba(251, 251, 246, 0.35); }
+.field [aria-invalid='true'] { border-style: dashed; }
+.field__error { font-size: clamp(11px, 1.35cqw, 18px); padding-left: 1.2cqw; margin-top: 0.4cqw; text-transform: none; }
+
+.form__trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; } /* honeypot */
+.form__submit {
+  margin-top: 0.8cqw;
+  min-height: clamp(44px, 4.4cqw, 60px);
+  background: var(--ink); color: var(--bg);
+  border: 0; border-radius: clamp(10px, 1.3cqw, 18px);
+  font-family: var(--font-display); font-style: italic; font-size: clamp(16px, 1.9cqw, 26px);
+  cursor: pointer; transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+.form__submit:hover:not(:disabled) { box-shadow: 0 0 22px rgba(251, 251, 246, 0.4); transform: translateY(-1px); }
+.form__submit:disabled { opacity: 0.6; cursor: progress; }
+.form__status { min-height: 1.5em; text-transform: none; font-size: clamp(13px, 1.55cqw, 20px); padding-left: 1.2cqw; }
+.form__status--success { color: #b9f5c8; }
+.form__status--error { color: #ffb4a8; }
+
+/* ============================================================
+   RESPONSIVE — tablet and phone. Same look, re-arranged.
+   ============================================================ */
+@media (max-width: 900px) {
+  .contact__grid { grid-template-columns: 1fr; margin-right: 0; gap: 6cqw; }
+  .contact__pappu { width: 24cqw; margin-left: 0; }
+  .contact__text { max-width: none; }
+  .field label { font-size: 15px; }
+  .video-frame { width: 86%; }
+  .road__car { width: 24cqw; right: 5cqw; }
+}
+
+@media (max-width: 720px) {
+  :root { --pad: 5.5cqw; --gapY: 44px; }
+  .hero { padding-inline: 3.5cqw; padding-top: 22px; }
+  .hero__frame { aspect-ratio: auto; min-height: 330px; border-width: 3px; }
+  .hero__logo { left: 8px; top: 8px; width: 58px; height: 46px; }
+  .hero__logo img { width: 50px; }
+  .hero__hi { font-size: 34px; }
+  .hero__name { font-size: clamp(26px, 8.4cqw, 44px); }
+  .avatar { position: relative; right: auto; bottom: auto; width: 60%; height: 40%; margin-top: 14px; }
+
+  .about__head { flex-wrap: wrap; align-items: center; }
+  .about__pappu { order: -1; margin-left: auto; margin-bottom: 8px; }
+  .about__text, .contact__text { font-size: 18px; line-height: 1.55; }
+  .section-title { font-size: clamp(30px, 9.4cqw, 48px); }
+
+  /* Skills: labels wrap and keep a small tilt instead of absolute positions */
+  .learning__doodles { position: static; margin-bottom: 14px; }
+  .learning__head { flex-direction: column; }
+  .learning__books { width: 34cqw; margin-top: 4cqw; }
+  .learning__pappu { width: 28cqw; }
+  .learning__titles { margin-left: 0; text-align: left; }
+  .learning__sub { font-size: 16px; margin-top: 10px; }
+  .skills { aspect-ratio: auto; margin: 22px 0 0; display: flex; flex-wrap: wrap; gap: 16px 12px; justify-content: center; }
+  .skill { position: relative; left: auto; top: auto; }
+  .skill__label { font-size: 20px; border-width: 3px; }
+
+  .projects__grid { grid-template-columns: 1fr; gap: 28px; margin: 28px 0 0; }
+  .projects__grid > .card:last-child:nth-child(odd) { width: 100%; }
+  .card { border-width: 5px; border-radius: 36px; }
+  .card__image { border-bottom-width: 5px; border-radius: 0 0 30px 30px; }
+  .card__title { font-size: 26px; padding: 14px 8px 18px; }
+  .projects__doodles { position: static; justify-content: center; margin-top: 28px; gap: 18px; }
+  .projects__pappu { width: 26cqw; }
+  .projects__easel { width: 15cqw; }
+
+  .video-frame { width: 100%; border-width: 5px; border-radius: 34px; }
+  .motion__doodles { position: static; justify-content: flex-end; margin-top: 18px; }
+  .motion__pappu { width: 24cqw; }
+  .motion__popcorn { width: 9cqw; }
+
+  .road__car { position: static; width: 46cqw; margin: 0 0 12px auto; }
+  .road__label { font-size: 22px; margin-top: 14px; }
+  .road__title { font-size: 18px; }
+  .road__years { font-size: 14px; }
+
+  .field label { font-size: 15px; }
+  .field__error { font-size: 13px; }
+  .form { gap: 12px; }
+  .field textarea { min-height: 120px; }
+}

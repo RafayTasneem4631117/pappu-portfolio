@@ -1,0 +1,15 @@
+# --- web framework ---
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+pydantic-settings>=2.2
+email-validator>=2.1        # needed for EmailStr validation
+
+# --- RAG pipeline ---
+chromadb>=0.5               # vector database (stores embeddings on disk)
+sentence-transformers>=3.0  # turns text into embeddings (downloads a small model on first run)
+anthropic>=0.40             # LLM API (Claude). Swap llm.py if you prefer another provider
+
+# --- testing ---
+pytest>=8.0
+httpx>=0.27

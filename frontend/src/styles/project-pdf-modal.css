@@ -1,0 +1,81 @@
+/* ============================================================
+   PDF VIEWER WINDOW (opens when a project card is clicked)
+   Same look as the rest of the site: dark panel, thick white outline,
+   rounded corners. It is a position:fixed overlay.
+   ============================================================ */
+.pdfm {
+  position: fixed; inset: 0; z-index: 50;
+  background: rgba(5, 6, 5, 0.82);          /* dark, slightly transparent: the page shows through */
+  backdrop-filter: blur(2px);
+  display: grid; place-items: center;
+  padding: 3dvh 3vw;
+  overscroll-behavior: contain;
+  animation: pdfm-fade 0.2s ease-out;
+}
+.pdfm__dialog {
+  width: min(1100px, 100%);
+  height: min(94dvh, 1000px);
+  display: flex; flex-direction: column;
+  background: var(--bg);
+  border: 5px solid var(--ink);
+  border-radius: 40px;
+  overflow: hidden;                          /* clips the PDF to the rounded corners */
+  box-shadow: 0 0 0 6px var(--bg), 0 24px 80px rgba(0, 0, 0, 0.7);
+  animation: pdfm-pop 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+}
+.pdfm__header {
+  flex: none; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 12px 14px 12px 28px; border-bottom: 4px solid var(--ink);
+}
+.pdfm__title {
+  font-family: var(--font-display); font-style: italic; font-weight: 400;
+  font-size: clamp(22px, 3.2vw, 38px); line-height: 1.1; letter-spacing: 0.03em;
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.pdfm__close {
+  flex: none; width: 50px; height: 50px; border-radius: 50%;
+  border: 4px solid var(--ink); background: transparent; color: var(--ink);
+  font-size: 20px; line-height: 1; cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+.pdfm__close:hover, .pdfm__close:focus-visible { background: var(--ink); color: var(--bg); transform: rotate(90deg); }
+
+.pdfm__body { flex: 1; min-height: 0; position: relative; background: #3b3b3b; }
+/* the iframe fills the window; the browser's PDF viewer scrolls through all pages */
+.pdfm__frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #fff; }
+
+.pdfm__msg {
+  position: absolute; inset: 0; margin: auto; height: fit-content; max-width: min(520px, 90%);
+  background: var(--bg); text-align: center; padding: 22px 24px; border: 4px dashed var(--ink); border-radius: 28px;
+  display: grid; gap: 8px; font-size: 18px; line-height: 1.4; text-transform: none;
+}
+.pdfm__msg strong { font-weight: 700; }
+.pdfm__msg code { font-family: monospace; font-size: 14px; word-break: break-all; border-bottom: 2px dashed var(--ink); }
+
+@keyframes pdfm-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pdfm-pop { from { opacity: 0; transform: translateY(18px) scale(0.97); } to { opacity: 1; transform: none; } }
+
+/* ---------- tablet ---------- */
+@media (max-width: 900px) {
+  .pdfm { padding: 2dvh 2.5vw; }
+  .pdfm__dialog { border-radius: 32px; height: 96dvh; }
+}
+/* ---------- phone: nearly full screen, still rounded ---------- */
+@media (max-width: 600px) {
+  .pdfm { padding: 8px; }
+  .pdfm__dialog { height: calc(100dvh - 16px); border-width: 4px; border-radius: 26px; }
+  .pdfm__header { padding: 8px 10px 8px 18px; border-bottom-width: 3px; }
+  .pdfm__close { width: 44px; height: 44px; border-width: 3px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pdfm, .pdfm__dialog { animation: none; }
+  .pdfm__close:hover, .pdfm__close:focus-visible { transform: none; }
+}
+/* Revision image inside the modal */
+.pdfm__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 16px;
+}

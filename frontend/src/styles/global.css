@@ -1,0 +1,90 @@
+/* ============================================================
+   GLOBAL STYLES — colours, fonts, resets.
+   Change the look of the whole site by editing the variables below.
+   ============================================================ */
+
+/* OPTIONAL: your design uses the font "Letter-O-Matic BB" (a paid Blambot font).
+   If you own a licence, put a web-font version at  assets/fonts/LetterOMatic.woff2
+   and the site will use it automatically. Otherwise the free Bangers /
+   Comic Neue fonts below are used. */
+
+
+:root {
+  --bg: #0a0c0b;          /* almost-black page background */
+  --ink: #fbfbf6;         /* off-white used for text, lines and outlines */
+  --panel: #231f20;       /* dark card / video panel colour */
+  --line: 0.42cqw;        /* thickness of outlines (scales with the page) */
+
+  --font-display: 'Comic Sans MS', cursive;
+  --font-body: 'Comic Sans MS', cursive;
+
+  --pad: 6.8cqw;          /* left/right padding of every section */
+  --gapY: clamp(40px, 6.2cqw, 90px); /* vertical space around sections */
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;      /* the design is all-caps */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; user-select: none; -webkit-user-drag: none; }
+h1, h2, h3, p, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+button { font: inherit; color: inherit; letter-spacing: inherit; text-transform: inherit; }
+
+/* Visible keyboard focus (accessibility) */
+:focus-visible { outline: 3px dashed var(--ink); outline-offset: 4px; }
+
+/* Layout wrapper. container-type lets us size things in "cqw"
+   = 1% of the page width (so the design scales like the Illustrator file). */
+.page { position: relative; }
+.content {
+  container-type: inline-size;
+  max-width: 1440px;
+  margin-inline: auto;
+}
+
+.section { padding: var(--gapY) var(--pad); position: relative; }
+
+.divider {
+  width: 100%;
+  max-width: calc(100% - 2 * var(--pad) + 0.8cqw);
+  margin: 0 auto;
+  border: 0;
+  border-top: max(2px, 0.14cqw) solid var(--ink);
+}
+
+/* Section headings with the thick underline */
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: italic;
+  font-size: clamp(28px, 4cqw, 58px);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  display: block;
+  text-align: center;
+}
+
+.section-title > span {
+  display: inline-block;
+  padding-bottom: 0.08em;
+  border-bottom: max(4px, 0.4cqw) solid var(--ink);
+  border-radius: 4px;
+}
+.section-title.center { text-align: center; }
